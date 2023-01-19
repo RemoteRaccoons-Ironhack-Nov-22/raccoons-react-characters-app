@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+import axios from 'axios';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 
 function App() {
+
+  const baseURL = 'https://ih-crud-api.herokuapp.com';
+
+  const [charactersArr, setCharactersArr] = useState(null);
+
+
+  useEffect(() => {
+    axios.get(baseURL + "/characters")
+      .then((response) => {
+        console.log(response.data);
+
+        setCharactersArr(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+      {/* <h1>number of characters: {charactersArr.length}</h1> */}
+
+      {charactersArr === null 
+        ? "loading..."
+        : charactersArr.map( (characterDetails, index) => {
+          return (
+            <div className="character" key={index} >
+              <h2>{characterDetails.name}</h2>
+              <p>Weapon: {characterDetails.weapon}</p>
+            </div>
+          )
+        }) }
+
     </div>
   );
 }
