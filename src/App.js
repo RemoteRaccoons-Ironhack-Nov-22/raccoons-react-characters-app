@@ -21,7 +21,6 @@ function App() {
     axios.get(process.env.REACT_APP_API_URL + "/characters")
       .then((response) => {
         console.log(response.data);
-
         setCharactersArr(response.data);
       })
       .catch((e) => {

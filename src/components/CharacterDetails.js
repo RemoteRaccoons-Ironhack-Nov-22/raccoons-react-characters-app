@@ -6,7 +6,7 @@ function CharacterDetails(props){
     const {characterId} = useParams();
     const navigate = useNavigate();
 
-    const details = props.charactersArr.find( characterDetails => {
+    const details = props.charactersArr?.find( characterDetails => {
         return characterDetails.id == characterId;
     });
     
