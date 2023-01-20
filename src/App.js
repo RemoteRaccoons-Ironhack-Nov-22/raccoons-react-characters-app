@@ -14,7 +14,7 @@ function App() {
 
       <nav>
         <p>this is the header</p>
-        <NavLink to="/">Home </NavLink>
+        <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
       </nav>
