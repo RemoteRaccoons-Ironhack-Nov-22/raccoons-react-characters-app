@@ -5,13 +5,11 @@ import { Link } from 'react-router-dom';
 
 function CharactersList() {
 
-    const baseURL = 'https://ih-crud-api.herokuapp.com';
-
+    
     const [charactersArr, setCharactersArr] = useState(null);
 
-
     useEffect(() => {
-        axios.get(baseURL + "/characters")
+        axios.get(process.env.REACT_APP_API_URL + "/characters")
             .then((response) => {
                 console.log(response.data);
 

@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 function CharacterDetails(){
 
-    const baseURL = 'https://ih-crud-api.herokuapp.com';
+    
 
     const [details, setDetails] = useState(null);
 
@@ -13,7 +13,7 @@ function CharacterDetails(){
     const navigate = useNavigate();
 
     useEffect( () => {
-        axios.get(baseURL + "/characters/" + characterId)
+        axios.get(process.env.REACT_APP_API_URL + "/characters/" + characterId)
             .then((response) => {
                 setDetails(response.data);
             })
@@ -24,7 +24,7 @@ function CharacterDetails(){
 
 
     const deleteCharacter = () => {
-        axios.delete(baseURL + "/characters/" + characterId)
+        axios.delete(process.env.REACT_APP_API_URL + "/characters/" + characterId)
             .then( response => {
                 console.log("character was deleted....");
                 navigate("/");
