@@ -1,32 +1,21 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-function CharacterDetails(){
-
-    
-
-    const [details, setDetails] = useState(null);
+function CharacterDetails(props){
 
     const {characterId} = useParams();
-
     const navigate = useNavigate();
 
-    useEffect( () => {
-        axios.get(process.env.REACT_APP_API_URL + "/characters/" + characterId)
-            .then((response) => {
-                setDetails(response.data);
-            })
-            .catch((e) => {
-                console.log("error getting character details from the API...", e);
-            });
-    }, []);
-
+    const details = props.charactersArr.find( characterDetails => {
+        return characterDetails.id == characterId;
+    });
+    
 
     const deleteCharacter = () => {
         axios.delete(process.env.REACT_APP_API_URL + "/characters/" + characterId)
             .then( response => {
                 console.log("character was deleted....");
+                props.callbackToUpdateList();
                 navigate("/");
             })
             .catch((e) => {
@@ -51,10 +40,7 @@ function CharacterDetails(){
 
     return(
         <>
-            {details === null 
-                ? "loading...."
-                : renderDetails()
-            }
+            {details && renderDetails() }
 
             <Link to="/">Back</Link>
         </>        
